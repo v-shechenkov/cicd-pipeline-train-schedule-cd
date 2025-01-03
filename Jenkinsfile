@@ -8,7 +8,7 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage('DeployToStaging') {
+        stage('DeployToStaging-DEBUG') {
             when {
                 branch 'master'
             }
@@ -16,6 +16,11 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     sh 'echo $USERPASS'
                 }
+            }
+        }
+        stage('DeployToStaging') {
+            when {
+                branch 'master'
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
