@@ -14,7 +14,10 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
-                    sh 'echo $USERPASS'
+                    sh '''
+                    echo $USERNAME
+                    echo $USERPASS
+                    '''
                 }
             }
         }
